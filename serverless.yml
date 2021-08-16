@@ -1,0 +1,30 @@
+org: dillpret
+app: shiri-serverless
+service: shiri-serverless
+
+frameworkVersion: '2'
+
+
+provider:
+  name: aws
+  runtime: python3.8
+  lambdaHashingVersion: '20201221'
+  region: eu-west-1
+
+functions:
+  hello:
+    handler: lambda_function.lambda_handler
+    events:
+      - http:
+          path: /
+          method: post
+          request:
+            schemas:
+              application/json:
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: non-linux
